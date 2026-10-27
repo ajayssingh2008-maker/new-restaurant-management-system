@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>🍽️ FoodHub</h2>
+    <p class="subtitle">Restaurant Management</p>
+
+    <button class="nav-btn active" data-page="dashboard">📊 Dashboard</button>
+    <button class="nav-btn" data-page="menu">🍕 Food Menu</button>
+    <button class="nav-btn" data-page="orders">🧾 Orders</button>
+    <button class="nav-btn" data-page="tables">🪑 Tables</button>
+
+    <div class="sidebar-bottom">Restaurant Admin Panel</div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <h1 id="pageTitle">Dashboard</h1>
+        <p>Manage your restaurant in one place.</p>
+      </div>
+      <span class="admin">👤 Admin</span>
+    </header>
+
+    <!-- Dashboard -->
+    <section id="dashboard" class="page active">
+      <div class="stats">
+        <div class="stat-card">
+          <span>Total Orders</span>
+          <h2 id="totalOrders">0</h2>
+        </div>
+        <div class="stat-card">
+          <span>Total Revenue</span>
+          <h2 id="totalRevenue">₹0.00</h2>
+        </div>
+        <div class="stat-card">
+          <span>Available Tables</span>
+          <h2 id="availableTables">8</h2>
+        </div>
+        <div class="stat-card">
+          <span>Menu Items</span>
+          <h2 id="menuCount">8</h2>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-heading">
+          <h2>Recent Orders</h2>
+          <button class="primary-btn" onclick="showPage('menu')">
+            + New Order
+          </button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Table</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="recentOrders"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu and new order -->
+    <section id="menu" class="page">
+      <div class="order-layout">
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>Food Menu</h2>
+            <input id="searchFood" type="search"
+                   placeholder="Search food...">
+          </div>
+
+          <div class="filters" id="categoryFilters"></div>
+          <div id="foodGrid" class="food-grid"></div>
+        </div>
+
+        <div class="panel cart-panel">
+          <h2>🛒 Current Order</h2>
+
+          <label for="tableSelect">Select Table</label>
+          <select id="tableSelect"></select>
+
+          <div id="cartItems" class="cart-items">
+            <p class="empty">Your cart is empty.</p>
+          </div>
+
+          <div class="bill">
+            <div><span>Subtotal</span><span id="subtotal">₹0.00</span></div>
+            <div><span>GST (5%)</span><span id="tax">₹0.00</span></div>
+            <div class="grand-total">
+              <strong>Total</strong>
+              <strong id="grandTotal">₹0.00</strong>
+            </div>
+          </div>
+
+          <button id="placeOrder" class="primary-btn full-btn">
+            Place Order
+          </button>
+          <button id="clearCart" class="secondary-btn full-btn">
+            Clear Cart
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Orders -->
+    <section id="orders" class="page">
+      <div class="panel">
+        <div class="panel-heading">
+          <h2>All Orders</h2>
+          <button class="secondary-btn" onclick="renderOrders()">
+            Refresh
+          </button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Date & Time</th>
+                <th>Table</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="allOrders"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tables -->
+    <section id="tables" class="page">
+      <div class="panel">
+        <h2>Restaurant Tables</h2>
+        <p class="muted">Table status updates when orders are placed or completed.</p>
+        <div id="tableGrid" class="table-grid"></div>
+      </div>
+    </section>
+
+    <footer>FoodHub Restaurant Management System</footer>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
